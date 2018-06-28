@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Rock Paper Scissors</title>
+    <title>Word Guess Game</title>
     <link rel="stylesheet" type="text/css" href="./assets/CSS/reset.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="./assets/CSS/style.css">
@@ -16,33 +16,48 @@
             <div class="row">
               <div class="col-lg-12">
                   <h2>Guess the Word!</h2>
+                  <br>
+                  <br>
+                  <h3>Press any letter to start.</h3>
               </div>
             </div>
             <br>
             <br>
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>You Choose: <span id="user-text"><strong>____</strong></span></h3>
+                    <h4>Your Letter Choice: <span id="letterChoice-text"><strong>____</strong></span></h4>
                 </div>
             </div>
             <div class="row">
+              <div class="col-lg-12">
+                  <!-- This needs to be created based on length of chosenWord in JS -->
+                  <h4>Current Word: <span id="currentWord-text"><strong>____</strong></span></h4>
+              </div>
+             </div>
+             <div class="row">
                 <div class="col-lg-12">
-                    <h3>The Computer Chooses: <span id="computer-text"><strong>____</strong></span></h3>
+                    <!-- This needs to be updated based on guessNumber in JS -->
+                    <h4>Guesses Remaining: <span id="guessesRemaining-text"><strong>15</strong></span></h4>
                 </div>
-            </div>
+               </div>
+
+            <!-- ///////////////////////////////////////////////////// -->
+
+            <br>
+            <br>
             <div class="row">
               <div class="col-lg-12">
-                  <h3>Wins: <span id="wins-text"><strong>0</strong></span></h3>
+                  <h5>Wins: <span id="wins-text"><strong>0</strong></span></h5>
               </div>
             </div>
             <div class="row">
               <div class="col-lg-12">
-                  <h3>Loses: <span id="loses-text"><strong>0</strong></span></h3>
+                  <h5>Loses: <span id="loses-text"><strong>0</strong></span></h5>
               </div>
             </div>
             <div class="row">
               <div class="col-lg-12">
-                  <h3>Ties: <span id="ties-text"><strong>0</strong></span></h3>
+                  <h5>Ties: <span id="ties-text"><strong>0</strong></span></h5>
               </div>
             </div>
           </div>
