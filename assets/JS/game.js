@@ -97,7 +97,10 @@ document.onkeyup = function(event) {
   
     }
 
-    console.log("Final String Output: " + chosenWordUnderlines);
+    console.log("Final String Output: " + chosenWordUnderlines.toString());
+
+    var FinalString = chosenWordUnderlines.toString();
+    currentWordText.textContent = FinalString;
 
     guessRemaining = allowableGuesses - guessNumber;
 
