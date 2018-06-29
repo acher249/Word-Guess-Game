@@ -4,7 +4,7 @@
 //****************************/
 
 //need to make this word.to lowercase...
-var chosenWord = "Greetings";
+var chosenWord = "greetings";
 var chosenWordUnderlines = [];
 var wordLength = chosenWord.length;
 
@@ -51,51 +51,59 @@ var guessNumber = 0;
 var allowableGuesses = 15;
 var guessRemaining = 0;
 
+var matchedLettersArr = [];
+var chosenWordUnderlines = [];
+for (i = 0; i < chosenWord.length; i++){
+    chosenWordUnderlines.push("_");
+}
+
 document.onkeyup = function(event) {
+
+    
 
     if(guessNumber < allowableGuesses){
 
         //create array with underlines.. in order to sub out letters
         //DONT DO THIS ON EVERY BUTTON PRESS
         // can't do this in an if statment. chosenWordUnderlines needs to be in same scope.
-        var chosenWordUnderlines = [];
-        for (i = 0; i < chosenWord.length; i++){
-            chosenWordUnderlines.push("_");
-        }
-        console.log("underlines before pushing letters :" + chosenWordUnderlines);
+        
+        
+        //console.log("underlines before pushing letters :" + chosenWordUnderlines);
 
         letterChoiceText.textContent = event.key;
         var userLetterChoice = event.key;
         console.log(userLetterChoice);
         guessNumber++;
+
+        
     
         //Loop through the letters in chosenWord, if any letters match to the user choice, do somthing.
         for (i = 0; i < LettersInWord.length; i++){
             if(userLetterChoice == LettersInWord[i]) {
                 console.log(LettersInWord[i] + " matches a letter!");
 
+
                 var indexOfChoice = LettersInWord.indexOf(userLetterChoice);
                 chosenWordUnderlines[indexOfChoice] = userLetterChoice;
 
+                matchedLettersArr.push(userLetterChoice);
                 //this is adding to the end of the array, 
                 //needs to substitute at the correct index
                 // chosenWordUnderlines.push(LettersInWord[i]);
             }
         }
-        
-        //Create array of underlines
-        chosenWordUnderlines = chosenWordUnderlines.join();
-        
-        chosenWordUnderlinesString = chosenWordUnderlines.toString();
-    
-        console.log("String Output" + chosenWordUnderlinesString);
 
-        guessRemaining = allowableGuesses - guessNumber;
-    
-        // tie back to html text.
-        guessesRemainingText.textContent = guessRemaining;
-        // losesText.textContent = loses;
-        // winsText.textContent = wins;
+        console.log("ALL MATCHED LETTERS: " + matchedLettersArr);
+  
     }
+
+    console.log("Final String Output: " + chosenWordUnderlines);
+
+    guessRemaining = allowableGuesses - guessNumber;
+
+    // tie back to html text.
+    guessesRemainingText.textContent = guessRemaining;
+    // losesText.textContent = loses;
+    // winsText.textContent = wins;
 
 };
