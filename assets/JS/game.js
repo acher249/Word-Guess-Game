@@ -13,10 +13,10 @@ var LettersInWord = [];
 //this is taking word length and making string of _,_,_
 // do this once up top to start the page without key press
 // then need to do it again below to live inside the scope.
-for (i = 0; i < chosenWord.length; i++){
-    var currentLetter = chosenWord[i];
-    LettersInWord.push(currentLetter);
-    chosenWordUnderlines.push("_");
+for (i = 0; i < chosenWord.length; i++) {
+  var currentLetter = chosenWord[i];
+  LettersInWord.push(currentLetter);
+  chosenWordUnderlines.push("_");
 }
 
 //Create array of underlines
@@ -24,7 +24,6 @@ chosenWordUnderlines = chosenWordUnderlines.join();
 
 chosenWordUnderlinesString = chosenWordUnderlines.toString();
 console.log(chosenWordUnderlinesString);
-
 
 console.log(LettersInWord);
 
@@ -53,48 +52,44 @@ var guessRemaining = 0;
 
 var matchedLettersArr = [];
 var chosenWordUnderlines = [];
-for (i = 0; i < chosenWord.length; i++){
+for (i = 0; i < chosenWord.length; i++) {
     chosenWordUnderlines.push("_");
 }
 
 document.onkeyup = function(event) {
+    if (guessNumber < allowableGuesses) {
 
-    
+      //create array with underlines.. in order to sub out letters
+      //DONT DO THIS ON EVERY BUTTON PRESS
+      // can't do this in an if statment. chosenWordUnderlines needs to be in same scope.
 
-    if(guessNumber < allowableGuesses){
+      letterChoiceText.textContent = event.key;
+      var userLetterChoice = event.key;
+      guessNumber++;
 
-        //create array with underlines.. in order to sub out letters
-        //DONT DO THIS ON EVERY BUTTON PRESS
-        // can't do this in an if statment. chosenWordUnderlines needs to be in same scope.
-        
-        
-        //console.log("underlines before pushing letters :" + chosenWordUnderlines);
+      //Loop through the letters in chosenWord, if any letters match to the user choice, do somthing.\
 
-        letterChoiceText.textContent = event.key;
-        var userLetterChoice = event.key;
-        console.log(userLetterChoice);
-        guessNumber++;
+      for (i = 0; i < LettersInWord.length; i++) {
 
-        
-    
-        //Loop through the letters in chosenWord, if any letters match to the user choice, do somthing.
-        for (i = 0; i < LettersInWord.length; i++){
-            if(userLetterChoice == LettersInWord[i]) {
-                console.log(LettersInWord[i] + " matches a letter!");
+        if (userLetterChoice === LettersInWord[i]) {
+          // console.log(LettersInWord[i] + " matches a letter!");
+          console.log('our index', LettersInWord.indexOf(userLetterChoice));
 
 
-                var indexOfChoice = LettersInWord.indexOf(userLetterChoice);
-                chosenWordUnderlines[indexOfChoice] = userLetterChoice;
+          // Here is the bug -> when we use indexOf it goes and retrives the FIRST occurance of that letter in the word and returns THAT index.
 
-                matchedLettersArr.push(userLetterChoice);
-                //this is adding to the end of the array, 
-                //needs to substitute at the correct index
-                // chosenWordUnderlines.push(LettersInWord[i]);
-            }
+          // therefore it will always return the first letter's index
+
+          var indexOfChoice = LettersInWord.indexOf(userLetterChoice);
+          chosenWordUnderlines[indexOfChoice] = userLetterChoice;
+
+          matchedLettersArr.push(userLetterChoice);
+          // this is adding to the end of the array,
+          // needs to substitute at the correct index
+          // chosenWordUnderlines.push(LettersInWord[i]);
         }
+      }
 
-        console.log("ALL MATCHED LETTERS: " + matchedLettersArr);
-  
     }
 
     console.log("Final String Output: " + chosenWordUnderlines.toString());
