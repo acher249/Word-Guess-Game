@@ -79,6 +79,10 @@ document.onkeyup = function(event) {
           // Here is the bug -> when we use indexOf it goes and retrives the FIRST occurance of that letter in the word and returns THAT index.
 
           // therefore it will always return the first letter's index
+          
+          //keep track of what has been filled.then reset 
+          //starting point of loop. by making the chosenWord smaller.
+          //is one index letter matches you remove the letter from the chosenWord.
 
           var indexOfChoice = LettersInWord.indexOf(userLetterChoice);
           chosenWordUnderlines[indexOfChoice] = userLetterChoice;
