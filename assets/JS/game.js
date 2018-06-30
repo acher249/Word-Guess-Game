@@ -2,10 +2,10 @@
 
 //Input the chosen word here.
 //****************************/
-
 //need to make this word.to lowercase...
 var chosenWord = "welcome";
 var chosenWordUnderlines = [];
+var chosenWordStars = [];
 var wordLength = chosenWord.length;
 
 var LettersInWordOriginal = [];
@@ -19,6 +19,7 @@ for (i = 0; i < chosenWord.length; i++) {
   LettersInWordOriginal.push(currentLetter);
   LettersInWordDestroyed.push(currentLetter);
   chosenWordUnderlines.push(" _ ");
+  chosenWordStars.push("*");
 }
 
 //Create array of underlines
@@ -28,6 +29,8 @@ chosenWordUnderlinesString = chosenWordUnderlines.toString();
 console.log(chosenWordUnderlinesString);
 
 console.log(LettersInWordOriginal);
+console.log("chosenWordStars: " + chosenWordStars);
+
 
 //****************************/
 
@@ -36,17 +39,9 @@ console.log(LettersInWordOriginal);
 var letterChoiceText = document.getElementById("letterChoice-text");
 var guessesRemainingText = document.getElementById("guessesRemaining-text");
 var currentWordText = document.getElementById("currentWord-text");
-var winsText = document.getElementById("wins-text");
-var losesText = document.getElementById("loses-text");
-var tiesText = document.getElementById("ties-text");
 
 //Send the underlined version of chosen word to the HTML tag.
 currentWordText.textContent = chosenWordUnderlinesString;
-
-//use this later after all guesses are finished.
-var wins = 0;
-var loses = 0;
-var ties = 0;
 
 var guessNumber = 0;
 var allowableGuesses = 15;
@@ -59,11 +54,11 @@ for (i = 0; i < chosenWord.length; i++) {
 }
 
 document.onkeyup = function(event) {
-    if (guessNumber < allowableGuesses) {
+  if (guessNumber < allowableGuesses) {
 
-      letterChoiceText.textContent = event.key;
-      var userLetterChoice = event.key;
-      guessNumber++;
+    letterChoiceText.textContent = event.key;
+    var userLetterChoice = event.key;
+    guessNumber++;
 
       //Loop through the letters in chosenWord, if any letters match to the user choice, do somthing.\
 
@@ -74,15 +69,37 @@ document.onkeyup = function(event) {
           var indexOfMatch = LettersInWordDestroyed.indexOf(userLetterChoice);
           chosenWordUnderlines[indexOfMatch] = " " + userLetterChoice + " ";
 
-          console.log("LettersInWordDestroyed: " + LettersInWordDestroyed);
-
           // replace the letter with a * at that index instead of deleting it.
           //then the indexes will match to substitute.
           if (indexOfMatch > -1) {
             LettersInWordDestroyed[indexOfMatch] = "*";
           }
+
+          console.log("LettersInWordDestroyed: " + LettersInWordDestroyed);
+
+          var starExistsInArray = false;
         }
       }
+
+    guessRemaining = allowableGuesses - guessNumber;
+    console.log("guessRemaining: " + guessRemaining);
+
+    //if we are at guess 15 and didn't get it tell them they lost.
+    if (LettersInWordDestroyed.join() == chosenWordStars.join()) {
+      console.log("YOU win!");
+      guessRemaining = 0;
+      swal({
+        title: "YOU WIN!",
+        icon: "success",
+        button: "Play Again",
+      });
+    }else if (guessRemaining == 0) {
+      console.log("YOU lose!");
+      swal({
+        title: "YOU LOSE!",
+        icon: "error",
+        button: "Play Again",
+      });
     }
 
     console.log("Final String Output: " + chosenWordUnderlines.toString());
@@ -90,16 +107,10 @@ document.onkeyup = function(event) {
     var FinalString = chosenWordUnderlines.toString();
     currentWordText.textContent = FinalString;
 
-    guessRemaining = allowableGuesses - guessNumber;
+    
 
     // tie guesses back to html text.
     guessesRemainingText.textContent = guessRemaining;
-    // losesText.textContent = loses;
-    // winsText.textContent = wins;
-
-    //GET WINS AND LOSES*****
-    // if() {
-
-    // }
+  }
 
 };
