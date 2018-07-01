@@ -1,16 +1,19 @@
 `use strict`;
 
-//Input the chosen word here.
-//****************************/
+//create logic for picking a random word out of an array each time you restart
+var wordOptions = ["architecture", "buildings", "engineering", "skyscraper", "residential", "structure"];
 
-var chosenWord = "Architecture";
-
-//****************************/
+//get random number to get random word out of array
+var randomIndex = Math.floor((Math.random() * wordOptions.length));
+var chosenWord = wordOptions[randomIndex];
 chosenWord = chosenWord.toLowerCase();
+
+//variable declaration
 var chosenWordUnderlines = [];
 var chosenWordStars = [];
 var wordLength = chosenWord.length;
 var LettersInWord = [];
+var LettersGuessed = [];
 
 var allowableGuesses = chosenWord.length * 2;
 
@@ -32,6 +35,7 @@ chosenWordUnderlinesString = chosenWordUnderlines.toString();
 var letterChoiceText = document.getElementById("letterChoice-text");
 var guessesRemainingText = document.getElementById("guessesRemaining-text");
 var currentWordText = document.getElementById("currentWord-text");
+var lettersGuessedText = document.getElementById("lettersGuessed-text");
 
 //Send the underlined version of chosen word to the HTML tag.
 currentWordText.textContent = chosenWordUnderlinesString;
@@ -57,26 +61,29 @@ document.onkeyup = function(event) {
     letterChoiceText.textContent = event.key;
     var userLetterChoice = event.key;
     guessNumber++;
+    LettersGuessed.push(userLetterChoice);
+    lettersGuessedText.textContent = LettersGuessed;
 
-      //Loop through the letters in chosenWord, if any letters match to the user choice, do somthing.
-      for (i = 0; i < LettersInWord.length; i++) {
 
-        if (userLetterChoice === LettersInWord[i]) {
+    //Loop through the letters in chosenWord, if any letters match to the user choice, do somthing.
+    for (i = 0; i < LettersInWord.length; i++) {
 
-          var indexOfMatch = LettersInWord.indexOf(userLetterChoice);
-          chosenWordUnderlines[indexOfMatch] = " " + userLetterChoice + " ";
+      if (userLetterChoice === LettersInWord[i]) {
 
-          // replace the letter with a * at that index instead of deleting it.
-          //then the indexes will match to substitute.
-          if (indexOfMatch > -1) {
-            LettersInWord[indexOfMatch] = "*";
-          }
+        var indexOfMatch = LettersInWord.indexOf(userLetterChoice);
+        chosenWordUnderlines[indexOfMatch] = " " + userLetterChoice + " ";
 
-          //console.log("LettersInWordDestroyed: " + LettersInWordDestroyed);
-
-          var starExistsInArray = false;
+        // replace the letter with a * at that index instead of deleting it.
+        //then the indexes will match to substitute.
+        if (indexOfMatch > -1) {
+          LettersInWord[indexOfMatch] = "*";
         }
+
+        //console.log("LettersInWordDestroyed: " + LettersInWordDestroyed);
+
+        var starExistsInArray = false;
       }
+    }
 
     guessRemaining = allowableGuesses - guessNumber;
     
@@ -86,6 +93,7 @@ document.onkeyup = function(event) {
       swal({
         title: "YOU WIN!",
         icon: "success",
+        text: "The word was: " + chosenWord,
         button: ":)", 
       });
       x.style.display = "block";
