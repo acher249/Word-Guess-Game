@@ -1,61 +1,105 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>Word Guess Game</title>
-    <link rel="stylesheet" type="text/css" href="./assets/CSS/reset.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="./assets/CSS/style.css">
-</head>
-  <body>
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-offset-1 col-md-11">
-          <div class="jumbotron">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hang Man Game</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="./assets/CSS/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:700" rel="stylesheet">
+  <body class="background">
+
+    <div class = "row">
+      <nav class="col-lg-12 navbar navbar-expand-lg navbar-light bg-light">
+        <a class="col-lg-2 navbar-brand" href="#">Hang Man Game</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        <div class="col-lg-6"></div>
+        <div class="col-lg-2 collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="https://github.com/acher249/Word-Guess-Game" target="_blank">Github</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="https://www.linkedin.com/in/adamchernick/" target="_blank">Linkedin</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="http://www.chernickdesign.com/" target="_blank">Portfolio</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <!-- <div class="row">
+      <div class="col-lg-2 kickRight">
+        <h2><b></b>Page Title</h2>
+      </div>
+    </div> -->
+    <!-- <br>
+    <br>
+    <svg height="1" width=100%>
+        <line x1="0" y1="0" x2="2000" y2="0" style="stroke:rgb(117, 117, 117);stroke: width 4;"/> -->
+
+        <div class="container">
             <div class="row">
-              <div class="col-lg-12">
-                  <h2>Guess the Word!</h2>
+              <div class="col-md-offset-1 col-md-11">
+                <div class="jumbotron">
+                  <div class="row">
+                    <div class="col-lg-12 fontChangeBold">
+                        <h2>Guess the Word!</h2>
+                        <br>
+                        <br>
+                        <h3>Press any letter to start.</h3>
+                    </div>
+                  </div>
                   <br>
                   <br>
-                  <h3>Press any letter to start.</h3>
-              </div>
-            </div>
-            <br>
-            <br>
-            <div class="row">
-                <div class="col-lg-12">
-                    <h4>Your Letter Choice: <span id="letterChoice-text"><strong>____</strong></span></h4>
-                </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-12">
-                  <!-- This needs to be created based on length of chosenWord in JS -->
-                  <h4>Current Word: <span id="currentWord-text"><strong>_</strong></span></h4>
-              </div>
-             </div>
-             <div class="row">
-                <div class="col-lg-12">
-                    <!-- This needs to be updated based on guessNumber in JS -->
-                    <h4>Guesses Remaining: <span id="guessesRemaining-text"><strong>∞</strong></span></h4>
-                </div>
-             </div>
-             <br>
-             <br>
-             <div class="row">
-                <div class="col-lg-12 playAgain-button">
-                    <button id = "button"><a class="nav-link" href="index.html">Play Again!</a></button>
-                    <!-- <button class="btn btn-dark btn-lg" href="./index.html">Play Again!</button> -->
+                  <div class="row">
+                      <div class="col-lg-12 fontChange">
+                          <h4>Your Letter Choice: <span id="letterChoice-text"><strong>_</strong></span></h4>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12 fontChange">
+                        <!-- This needs to be created based on length of chosenWord in JS -->
+                        <h4>Current Word: <span id="currentWord-text"><strong>_</strong></span></h4>
+                    </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-lg-12 fontChange">
+                          <!-- This needs to be updated based on guessNumber in JS -->
+                          <h4>Guesses Remaining: <span id="guessesRemaining-text"><strong>_</strong></span></h4>
+                      </div>
+                   </div>
+                   <br>
+                   <br>
+                   <div class="row">
+                      <div class="col-lg-12 playAgain-button fontChange">
+                          <button id = "button"><a class="nav-link" href="index.html">Play Again!</a></button>
+                          <!-- <button class="btn btn-dark btn-lg" href="./index.html">Play Again!</button> -->
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+    
+
+      <div class="row container-fluid footer">
+        <div class="col-lg-12">
+          <p class="center"><!-- Footer Text --></p>
         </div>
       </div>
-    </div>
-    </script>
-
-<script src="./assets/JS/game.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    <script src="./assets/JS/game.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
   </body>
 </html>

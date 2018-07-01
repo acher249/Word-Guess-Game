@@ -10,29 +10,23 @@ chosenWord = chosenWord.toLowerCase();
 var chosenWordUnderlines = [];
 var chosenWordStars = [];
 var wordLength = chosenWord.length;
+var LettersInWord = [];
 
-var LettersInWordOriginal = [];
-var LettersInWordDestroyed = [];
+var allowableGuesses = chosenWord.length * 2;
 
 //this is taking word length and making string of _,_,_
 // do this once up top to start the page without key press
 // then need to do it again below to live inside the scope.
 for (i = 0; i < chosenWord.length; i++) {
   var currentLetter = chosenWord[i];
-  LettersInWordOriginal.push(currentLetter);
-  LettersInWordDestroyed.push(currentLetter);
+  LettersInWord.push(currentLetter);
   chosenWordUnderlines.push(" _ ");
   chosenWordStars.push("*");
 }
 
 //Create array of underlines
 chosenWordUnderlines = chosenWordUnderlines.join();
-
 chosenWordUnderlinesString = chosenWordUnderlines.toString();
-//console.log(chosenWordUnderlinesString);
-
-//console.log(LettersInWordOriginal);
-//console.log("chosenWordStars: " + chosenWordStars);
 
 //Link to HTML tags
 var letterChoiceText = document.getElementById("letterChoice-text");
@@ -43,7 +37,6 @@ var currentWordText = document.getElementById("currentWord-text");
 currentWordText.textContent = chosenWordUnderlinesString;
 
 var guessNumber = 0;
-var allowableGuesses = chosenWord.length * 2;
 var guessRemaining = 0;
 
 var matchedLettersArr = [];
@@ -66,17 +59,17 @@ document.onkeyup = function(event) {
     guessNumber++;
 
       //Loop through the letters in chosenWord, if any letters match to the user choice, do somthing.
-      for (i = 0; i < LettersInWordDestroyed.length; i++) {
+      for (i = 0; i < LettersInWord.length; i++) {
 
-        if (userLetterChoice === LettersInWordDestroyed[i]) {
+        if (userLetterChoice === LettersInWord[i]) {
 
-          var indexOfMatch = LettersInWordDestroyed.indexOf(userLetterChoice);
+          var indexOfMatch = LettersInWord.indexOf(userLetterChoice);
           chosenWordUnderlines[indexOfMatch] = " " + userLetterChoice + " ";
 
           // replace the letter with a * at that index instead of deleting it.
           //then the indexes will match to substitute.
           if (indexOfMatch > -1) {
-            LettersInWordDestroyed[indexOfMatch] = "*";
+            LettersInWord[indexOfMatch] = "*";
           }
 
           //console.log("LettersInWordDestroyed: " + LettersInWordDestroyed);
@@ -87,7 +80,7 @@ document.onkeyup = function(event) {
 
     guessRemaining = allowableGuesses - guessNumber;
     
-    if (LettersInWordDestroyed.join() == chosenWordStars.join()) {
+    if (LettersInWord.join() == chosenWordStars.join()) {
       console.log("YOU win!");
       guessRemaining = 0;
       swal({
@@ -111,10 +104,7 @@ document.onkeyup = function(event) {
 
     var FinalString = chosenWordUnderlines.toString();
     currentWordText.textContent = FinalString;
-
     
-
-    // tie guesses back to html text.
     guessesRemainingText.textContent = guessRemaining;
   }
 
