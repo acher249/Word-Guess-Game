@@ -62,7 +62,8 @@ document.onkeyup = function(event) {
     var userLetterChoice = event.key;
     guessNumber++;
     LettersGuessed.push(userLetterChoice);
-    lettersGuessedText.textContent = LettersGuessed;
+    LettersGuessedString = LettersGuessed.toString().toUpperCase();
+    lettersGuessedText.textContent = LettersGuessedString;
 
 
     //Loop through the letters in chosenWord, if any letters match to the user choice, do somthing.
