@@ -2,8 +2,11 @@
 
 //Input the chosen word here.
 //****************************/
-//need to make this word.to lowercase...
-var chosenWord = "welcome";
+
+var chosenWord = "Architecture";
+
+//****************************/
+chosenWord = chosenWord.toLowerCase();
 var chosenWordUnderlines = [];
 var chosenWordStars = [];
 var wordLength = chosenWord.length;
@@ -26,16 +29,12 @@ for (i = 0; i < chosenWord.length; i++) {
 chosenWordUnderlines = chosenWordUnderlines.join();
 
 chosenWordUnderlinesString = chosenWordUnderlines.toString();
-console.log(chosenWordUnderlinesString);
+//console.log(chosenWordUnderlinesString);
 
-console.log(LettersInWordOriginal);
-console.log("chosenWordStars: " + chosenWordStars);
-
-
-//****************************/
+//console.log(LettersInWordOriginal);
+//console.log("chosenWordStars: " + chosenWordStars);
 
 //Link to HTML tags
-
 var letterChoiceText = document.getElementById("letterChoice-text");
 var guessesRemainingText = document.getElementById("guessesRemaining-text");
 var currentWordText = document.getElementById("currentWord-text");
@@ -44,7 +43,7 @@ var currentWordText = document.getElementById("currentWord-text");
 currentWordText.textContent = chosenWordUnderlinesString;
 
 var guessNumber = 0;
-var allowableGuesses = 15;
+var allowableGuesses = chosenWord.length * 2;
 var guessRemaining = 0;
 
 var matchedLettersArr = [];
@@ -53,15 +52,20 @@ for (i = 0; i < chosenWord.length; i++) {
     chosenWordUnderlines.push(" _ ");
 }
 
+var gameover = false;
+
+//hide play again button until the game is over
+var x = document.getElementById("button");
+x.style.display = "none";
+
 document.onkeyup = function(event) {
-  if (guessNumber < allowableGuesses) {
+  if (guessNumber < allowableGuesses && gameover == false) {
 
     letterChoiceText.textContent = event.key;
     var userLetterChoice = event.key;
     guessNumber++;
 
-      //Loop through the letters in chosenWord, if any letters match to the user choice, do somthing.\
-
+      //Loop through the letters in chosenWord, if any letters match to the user choice, do somthing.
       for (i = 0; i < LettersInWordDestroyed.length; i++) {
 
         if (userLetterChoice === LettersInWordDestroyed[i]) {
@@ -75,33 +79,34 @@ document.onkeyup = function(event) {
             LettersInWordDestroyed[indexOfMatch] = "*";
           }
 
-          console.log("LettersInWordDestroyed: " + LettersInWordDestroyed);
+          //console.log("LettersInWordDestroyed: " + LettersInWordDestroyed);
 
           var starExistsInArray = false;
         }
       }
 
     guessRemaining = allowableGuesses - guessNumber;
-    console.log("guessRemaining: " + guessRemaining);
-
-    //if we are at guess 15 and didn't get it tell them they lost.
+    
     if (LettersInWordDestroyed.join() == chosenWordStars.join()) {
       console.log("YOU win!");
       guessRemaining = 0;
       swal({
         title: "YOU WIN!",
         icon: "success",
-        button: "Play Again",
+        button: ":)", 
       });
-    }else if (guessRemaining == 0) {
+      x.style.display = "block";
+      gameover = true;
+        }else if (guessRemaining == 0) {
       console.log("YOU lose!");
       swal({
         title: "YOU LOSE!",
         icon: "error",
-        button: "Play Again",
+        button: ":(",
       });
-    }
-
+      x.style.display = "block";
+      gameover = true;
+      }
     console.log("Final String Output: " + chosenWordUnderlines.toString());
 
     var FinalString = chosenWordUnderlines.toString();
