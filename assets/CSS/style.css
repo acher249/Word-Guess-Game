@@ -20,6 +20,10 @@
     opacity: 0.8;
 }
 
+.p-3 {
+    width: 320px;
+}
+
 .navbar-brand {
     /* background-color: rgb(163, 173, 172); */
     width:180px;
